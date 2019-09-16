@@ -8,8 +8,8 @@ class mystring {
         char *p;
         int length = 0;
         bool isvalid_letter(char m){
-            return(m == 'A'||m == 'T'||m == 'C'|| m == 'G'||m == 'R'||m == 'Y'||m == 'K'||
-                m == 'S'||m == 'M'||m == 'H'||m == 'B'||m == 'V'||m == 'D'||m == 'N');
+            return((m == 'A')||(m == 'T')||(m == 'C')||(m == 'G')||(m == 'R')||
+                (m == 'Y')||(m == 'K')||(m == 'S')||(m == 'M')||(m == 'H')||(m == 'B')||(m == 'V')||(m == 'D')||(m == 'N'));
         }
         void addstring(const char* p1, const char* p2){
             p = (char*)malloc(strlen(p1) + strlen(p2) + 1);
@@ -22,7 +22,7 @@ class mystring {
         bool isvalid();
         const char* getstring();
         char getchar();
-        mystring operator+( mystring  one){
+        mystring operator+(mystring  one){
             mystring result;
             result.addstring(this->getstring(), one.getstring());
             return result;
@@ -38,8 +38,8 @@ int mystring::getlength(){
 
 bool mystring::isvalid(){
     int i = 0;
-    while(*(p + i) == '\0'){
-        if(isvalid_letter(*(p + i))){
+    while(*(p + i) != '\0'){
+        if(!(isvalid_letter(*(p + i)))){
             return false;
         }
         i++;
@@ -56,10 +56,14 @@ char mystring::getchar(){
 }
 
 mystring::mystring(const char* k) {
-    
     length = strlen(k);
+    char* temp = (char*)malloc(strlen(k) + 1);
+    strcpy(temp, k);
+    for(int i = 0; i != length; i++)
+        *(temp + i) = toupper(*(temp + i));
     p = (char*)malloc(strlen(k) + 1);
-    strcpy(p, k);
+    strcpy(p, temp);
+    free(temp);
 }
 
 mystring::mystring(){

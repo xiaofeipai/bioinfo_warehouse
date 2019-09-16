@@ -18,15 +18,40 @@ static int test_pass = 0;
 #define EXPECT_TEST_STRING(expect, actual) EXPECT_TEST_ACTUAL(!strcmp(expect, actual), expect, actual, "%s")
 
 void testing_string_construction(){
-    mystring i("AAACCC");
+    mystring i("aaaccc");
     EXPECT_TEST_STRING("AAACCC", i.getstring());
+}
+
+#define EXPECT_TESTING_VALID(expect, input)\
+    do{\
+        mystring i(input);\
+        EXPECT_TEST_ACTUAL(expect == i.isvalid(), expect, i.isvalid(), "%s");\
+    }while(0)
+
+void testing_string_valid(){
+    EXPECT_TESTING_VALID(1, "aaaa");
+    EXPECT_TESTING_VALID(false, "%");
+}
+
+#define EXPECT_TESTING_ADD(expect, input1, input2)\
+    do{\
+        mystring i1(input1);\
+        mystring i2(input2);\
+        i1 = i1 + i2;\
+        EXPECT_TEST_STRING(expect, i1.getstring());\
+    }while(0)
+
+void testing_string_add(){
+    EXPECT_TESTING_ADD("AACC", "aa", "cc");
+    EXPECT_TESTING_ADD("AAGG", "aa", "GG");
+    EXPECT_TESTING_ADD("AAMMM", "aa", "mmm");
 }
 
 void testing(){
     testing_string_construction();
+    testing_string_valid();
+    testing_string_add();
 }
-
-
 
 int main(){
     testing();
