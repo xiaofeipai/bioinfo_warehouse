@@ -5,10 +5,10 @@ typedef enum{PAIR_ALIGN_DNA} run_type;
 typedef enum{RUN_OK, STRING_NULL, STRING_INVALID} run_status;
 typedef enum{FROM_LEFT, FROM_UP, FROM_DIAGONAL} grade_from;
 
-struct result{
+typedef struct {
     run_type r;
-    const char* final_result;
-};
+    char* final_result;
+}result;
 
 bool if_null(const char* string_one);
 int get_string_length(const char* string_one);

@@ -33,7 +33,6 @@ run_status Pairwise_align_dna(const char* string_one, const char * string_two, r
     mystring mystring_two(string_two);
     int string_one_length = mystring_one.getlength() + 1; 
     int string_two_length = mystring_two.getlength() + 1;
-    
     int M1[string_one_length][string_two_length];
     int M2[string_one_length][string_two_length];
     /*matrix initialization refer to step one*/
@@ -80,13 +79,13 @@ run_status Pairwise_align_dna(const char* string_one, const char * string_two, r
     
     while(1){
         if(M2[i_MAX][j_MAX] == FROM_LEFT){
-            return_string.addLetter(mystring_two.getchar(j_MAX - 1));
+            return_string.addLetterFront(mystring_two.getchar(j_MAX - 1));
             j_MAX--; 
         } else if(M2[i_MAX][j_MAX] == FROM_UP){
             i_MAX--;
-            return_string.addLetter('-');
+            return_string.addLetterFront('-');
         } else {
-            return_string.addLetter(mystring_two.getchar(j_MAX - 1));
+            return_string.addLetterFront(mystring_two.getchar(j_MAX - 1));
             j_MAX --;
             i_MAX --;
         }
@@ -96,8 +95,7 @@ run_status Pairwise_align_dna(const char* string_one, const char * string_two, r
         }
     }
     string_result->r = PAIR_ALIGN_DNA;
-    string_result->final_result = return_string.getstring();
-    printf(string_result->final_result);
+    string_result->final_result = (char*)malloc(strlen(return_string.getstring()) + 1);
+    strcpy(string_result->final_result, return_string.getstring());
     return RUN_OK;
-
 }

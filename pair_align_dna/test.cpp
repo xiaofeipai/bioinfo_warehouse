@@ -30,7 +30,8 @@ static void if_null_test(){
 static void align_dna_testing(){
     result string_result;
     TEST_INT(STRING_NULL, Pairwise_align_dna("A", "",  &string_result));
-    TEST_INT(RUN_OK, Pairwise_align_dna("ATACC","AATACC",   &string_result));
+    TEST_INT(RUN_OK, Pairwise_align_dna("AACC","AATACC",  &string_result));
+    std::cout <<string_result.final_result;
     TEST_STRING("AATACC", string_result.final_result);
 }
 
