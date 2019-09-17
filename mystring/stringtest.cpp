@@ -33,20 +33,6 @@ void testing_string_valid(){
     EXPECT_TESTING_VALID(false, "%");
 }
 
-#define EXPECT_TESTING_ADD(expect, input1, input2)\
-    do{\
-        mystring i1(input1);\
-        mystring i2(input2);\
-        i1 = i1 + i2;\
-        EXPECT_TEST_STRING(expect, i1.getstring());\
-    }while(0)
-
-void testing_string_add(){
-    EXPECT_TESTING_ADD("AACC", "aa", "cc");
-    EXPECT_TESTING_ADD("AAGG", "aa", "GG");
-    EXPECT_TESTING_ADD("AAMMM", "aa", "mmm");
-}
-
 #define EXPECT_TESTING_ADDCHAR(expect, input1, input2)\
     do{\
         mystring i1(input1);\
@@ -58,11 +44,16 @@ void testing_letter_add(){
     EXPECT_TESTING_ADDCHAR("AAGG", "AAG",'G');
 }
 
+void testing_null(){
+    mystring m;
+    EXPECT_TEST_ACTUAL(m.isNone(),1,0, "%d");
+}
+
 void testing(){
     testing_string_construction();
+    testing_null();
     testing_string_valid();
-    testing_string_add();
-    testing_letter_add();
+    testing_letter_add(); 
 }
 
 int main(){

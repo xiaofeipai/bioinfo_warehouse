@@ -12,12 +12,7 @@ class mystring {
             return((m == 'A')||(m == 'T')||(m == 'C')||(m == 'G')||(m == 'R')||
                 (m == 'Y')||(m == 'K')||(m == 'S')||(m == 'M')||(m == 'H')||(m == 'B')||(m == 'V')||(m == 'D')||(m == 'N'));
         }
-        void addstring(const char* p1, const char* p2){
-            p = (char*)malloc(strlen(p1) + strlen(p2) + 1);
-            strcpy(p, p1);
-            strcat(p, p2);
-        }
-
+    
         void addchar(char p1, const char* p2){
             p = (char*)malloc(strlen(p2) + 2);
             strcpy(p, p2);
@@ -35,13 +30,9 @@ class mystring {
     public:
         int getlength();
         bool isvalid();
+        bool isNone();
         const char* getstring();
         char getchar(int i);
-        mystring operator+(mystring  one){
-            mystring result;
-            result.addstring(this->getstring(), one.getstring());
-            return result;
-        };
         void addLetter(char one);
         void addLetterFront(char one);
         mystring(const char* k);
@@ -62,6 +53,9 @@ bool mystring::isvalid(){
         i++;
     }
     return true;
+}
+bool mystring::isNone(){
+    return *p == '\0';
 }
 
 const char* mystring::getstring(){
@@ -107,7 +101,8 @@ mystring::mystring(const char* k) {
 }
 
 mystring::mystring(){
-    p = 0;
+    p = (char*)malloc(1);
+    *p = '\0';
 }
 
 mystring::~mystring() {

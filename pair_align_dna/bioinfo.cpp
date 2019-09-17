@@ -11,26 +11,10 @@ int align_letter(char one, char two){
     else
         return -1;
 }
-
-bool if_null(const char* string_one){
-    if(*string_one == '\0')
-        return 1;
-    else
-        return 0;
-}
-int get_string_length(const char* string_one){
-    int i = 0;
-    while(*(string_one + i) != '\0')
-        i++;
-    return i;
-}
-
-run_status Pairwise_align_dna(const char* string_one, const char * string_two, result* string_result){
-    if(if_null(string_one)||if_null(string_two)){
+run_status Pairwise_align_dna(mystring mystring_one, mystring mystring_two, result* string_result){
+    if(mystring_one.isNone()||mystring_two.isNone()){
         return STRING_NULL;
     }
-    mystring mystring_one(string_one);
-    mystring mystring_two(string_two);
     int string_one_length = mystring_one.getlength() + 1; 
     int string_two_length = mystring_two.getlength() + 1;
     int M1[string_one_length][string_two_length];

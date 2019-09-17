@@ -20,19 +20,17 @@ static int test_pass = 0;
 
 #define TEST_STRING(expect, actual) EXPECT_TEST_ACTUAL(!strcmp(expect, actual), expect, actual, "%s")
 #define TEST_INT(expect, actual) EXPECT_TEST_ACTUAL((expect) == (actual), expect, actual, "%d")
-
-
-static void if_null_test(){
-    TEST_INT(0, if_null("0"));
-    TEST_INT(1, if_null(""));
-}
+#define TEST_ALIGN_DNA(expect_status, expect_string, input1, input2)\
+    do{\
+        result string_result;\
+        mystring mystring_one(input1);\
+        mystring mystring_two(input2);\
+        TEST_INT(expect_status, Pairwise_align_dna(mystring_one, mystring_two, &string_result));\
+        TEST_STRING(expect_string, string_result.final_result);\
+    }while(0)
 
 static void align_dna_testing(){
-    result string_result;
-    TEST_INT(STRING_NULL, Pairwise_align_dna("A", "",  &string_result));
-    TEST_INT(RUN_OK, Pairwise_align_dna("AACC","AATACC",  &string_result));
-    std::cout <<string_result.final_result;
-    TEST_STRING("AATACC", string_result.final_result);
+    TEST_ALIGN_DNA(RUN_OK, "AATACC", "AACC", "AATACC");
 }
 
 static void testing(){
