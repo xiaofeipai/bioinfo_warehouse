@@ -18,21 +18,9 @@ static int test_pass = 0;
         }\
     }while(0)
 
-#define TEST_STRING(expect, actual) EXPECT_TEST_ACTUAL(expect == actual, expect, actual, "%s")
+#define TEST_STRING(expect, actual) EXPECT_TEST_ACTUAL(!strcmp(expect, actual), expect, actual, "%s")
 #define TEST_INT(expect, actual) EXPECT_TEST_ACTUAL((expect) == (actual), expect, actual, "%d")
 
-static void string_count_testing(){
-    TEST_INT(2, get_string_length("AA"));
-    TEST_INT(0, get_string_length(""));
-    TEST_INT(2, get_string_length("CC"));
-}
-
-static void align_testing(){
-    TEST_INT(1, align_letter('a', 'A'));
-    TEST_INT(-1, align_letter('a', 'b'));
-    TEST_INT(-1, align_letter('a', 'c'));
-
-}
 
 static void if_null_test(){
     TEST_INT(0, if_null("0"));
@@ -47,10 +35,6 @@ static void align_dna_testing(){
 }
 
 static void testing(){
-    string_count_testing();
-    align_testing();
-    if_null_test();
-    align_testing();
     align_dna_testing();
 }
 

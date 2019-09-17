@@ -16,17 +16,33 @@ class mystring {
             strcpy(p, p1);
             strcat(p, p2);
         }
+        void addchar(char p1, const char* p2){
+            p = (char*)malloc(strlen(p2) + 2);
+            strcpy(p, p2);
+            *(p + strlen(p2)) = p1;
+            *(p + strlen(p2) + 1) = '\0'; 
+        }
 
     public:
         int getlength();
         bool isvalid();
         const char* getstring();
-        char getchar();
+        char getchar(int i);
         mystring operator+(mystring  one){
             mystring result;
             result.addstring(this->getstring(), one.getstring());
             return result;
         };
+        void addLetter(char one){
+            if(p){
+                addchar(one, this->getstring());
+            }
+            else {
+                p = (char*)malloc(2);
+                *p = one;
+                *(p + 1) = '\0';
+            }
+        }
         mystring(const char* k);
         mystring();
         ~mystring();
@@ -51,8 +67,11 @@ const char* mystring::getstring(){
     return p;
 }
 
-char mystring::getchar(){
-    return *p;
+char mystring::getchar(int i){
+    if (i >= length){
+        return '\0';
+    }
+    return *(p + i);
 }
 
 mystring::mystring(const char* k) {
@@ -67,7 +86,7 @@ mystring::mystring(const char* k) {
 }
 
 mystring::mystring(){
-    p = NULL;
+    p = 0;
 }
 
 mystring::~mystring() {

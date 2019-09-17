@@ -47,10 +47,22 @@ void testing_string_add(){
     EXPECT_TESTING_ADD("AAMMM", "aa", "mmm");
 }
 
+#define EXPECT_TESTING_ADDCHAR(expect, input1, input2)\
+    do{\
+        mystring i1(input1);\
+        i1.addLetter(input2);\
+        EXPECT_TEST_STRING(expect, i1.getstring());\
+    }while(0)
+
+void testing_letter_add(){
+    EXPECT_TESTING_ADDCHAR("AAGG", "AAG",'G');
+}
+
 void testing(){
     testing_string_construction();
     testing_string_valid();
     testing_string_add();
+    testing_letter_add();
 }
 
 int main(){
