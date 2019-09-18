@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "bioinfo.cpp"
 
 static int main_ret = 0;
@@ -31,6 +30,7 @@ static int test_pass = 0;
 
 static void align_dna_testing(){
     TEST_ALIGN_DNA(RUN_OK, "AATACC", "AACC", "AATACC");
+    TEST_ALIGN_DNA(RUN_OK, "AATACC", "AAMGG", "AAmTGG");
 }
 
 static void testing(){

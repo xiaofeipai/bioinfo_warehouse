@@ -1,5 +1,4 @@
 #include "bioinfo.h"
-#include <string>
 #include "..\mystring\mystring.cpp"
 #include <iostream>
 #define MAX(a, b) a>b?(a):(b)

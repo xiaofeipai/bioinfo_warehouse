@@ -49,11 +49,22 @@ void testing_null(){
     EXPECT_TEST_ACTUAL(m.isNone(),1,0, "%d");
 }
 
+void EXPECT_TESTING_ADDSTRING(const char* expect,const char* input1,const char* input2){
+        mystring ms1(input1);
+        mystring ms2(input2);
+        ms1.addString(ms2.getstring());
+        EXPECT_TEST_STRING(expect, ms1.getstring());
+    }
+
+void testing_add_string(){
+    EXPECT_TESTING_ADDSTRING("AACC", "AA", "CC");
+}
 void testing(){
     testing_string_construction();
     testing_null();
     testing_string_valid();
-    testing_letter_add(); 
+    testing_letter_add();
+    testing_add_string();
 }
 
 int main(){

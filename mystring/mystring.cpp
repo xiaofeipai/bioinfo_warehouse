@@ -35,6 +35,7 @@ class mystring {
         char getchar(int i);
         void addLetter(char one);
         void addLetterFront(char one);
+        void addString(const char* k);
         mystring(const char* k);
         mystring();
         ~mystring();
@@ -55,7 +56,7 @@ bool mystring::isvalid(){
     return true;
 }
 bool mystring::isNone(){
-    return *p == '\0';
+    return length == 0;
 }
 
 const char* mystring::getstring(){
@@ -77,6 +78,7 @@ void mystring::addLetter(char one) {
         *p = one;
         *(p + 1) = '\0';
     }
+    length++;
 }
 
 void mystring::addLetterFront(char one) {
@@ -86,6 +88,28 @@ void mystring::addLetterFront(char one) {
         p = (char*)malloc(2);
         *p = one;
         *(p + 1) = '\0';
+    }
+    length++;
+}
+
+void mystring::addString(const char* k){
+    if(length == 0){
+        length = strlen(k);
+        char* temp = (char*)malloc(strlen(k) + 1);
+        strcpy(temp, k);
+        for(int i = 0; i != length; i++)
+            *(temp + i) = toupper(*(temp + i));
+        p = (char*)malloc(strlen(k) + 1);
+        strcpy(p, temp);
+        free(temp);
+    } else {
+        char* temp = (char*)malloc(length + 1);
+        strcpy(temp, p);
+        length = length + strlen(k);
+        p = (char*)malloc(length + 1);
+        strcpy(p, temp);
+        strcat(p, k);
+        free(temp);
     }
 }
 
@@ -108,5 +132,3 @@ mystring::mystring(){
 mystring::~mystring() {
     free(p);
 }
-
-
