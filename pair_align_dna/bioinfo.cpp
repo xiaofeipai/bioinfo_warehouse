@@ -1,5 +1,6 @@
 #include "bioinfo.h"
 #include "..\mystring\mystring.cpp"
+#include "..\matrix\mymatrix.cpp"
 #include <iostream>
 #define MAX(a, b) a>b?(a):(b)
 
@@ -14,31 +15,35 @@ run_status Pairwise_align_dna(mystring mystring_one, mystring mystring_two, resu
     if(mystring_one.isNone()||mystring_two.isNone()){
         return STRING_NULL;
     }
+    if(!mystring_one.isvalid()||!mystring_two.isvalid()){
+        return STRING_INVALID;
+    }
     int string_one_length = mystring_one.getlength() + 1; 
     int string_two_length = mystring_two.getlength() + 1;
-    int M1[string_one_length][string_two_length];
-    int M2[string_one_length][string_two_length];
+    Mymatrix M1(string_one_length, string_two_length);
+    Mymatrix M2(string_one_length, string_two_length);
     /*matrix initialization refer to step one*/
     for (int i = 0; i != string_one_length; i++){
-        M1[i][0] = i*gap;
-        M2[i][0] = FROM_UP;
+        M1.change_matrix_value(i * gap, i, 0);
+        M2.change_matrix_value(FROM_UP, i, 0);
     }
     for (int i = 0; i != string_two_length; i++){
-        M1[0][i] = i*gap;
-        M2[0][i] = FROM_LEFT;
+        M1.change_matrix_value(i * gap, 0, i);
+        M2.change_matrix_value(FROM_LEFT, 0, i);
     }
     
     /*matrix calculation refer to step two*/
     for(int i = 1; i != string_one_length; i++){
         for(int j = 1; j != string_two_length; j++){
-            M1[i][j] = MAX(M1[i - 1][j - 1] + align_letter(mystring_one.getchar(i), mystring_two.getchar(j)), M1[i - 1][j] + gap);
-            M1[i][j] = MAX(M1[i][j], M1[i][j - 1] + gap);
-            if(M1[i][j] == M1[i - 1][j] + gap)
-                M2[i][j] = FROM_UP;
-            else if(M1[i][j] == M1[i][j - 1] + gap)
-                M2[i][j] = FROM_LEFT;
+            M1.change_matrix_value(MAX(M1.getvalue(i - 1, j - 1) + 
+                align_letter(mystring_one.getchar(i), mystring_two.getchar(j)), M1.getvalue(i - 1, j) + gap), i, j);
+            M1.change_matrix_value(MAX(M1.getvalue(i, j), M1.getvalue(i, j - 1) + gap), i, j);
+            if(M1.getvalue(i, j) == M1.getvalue(i - 1, j) + gap)
+                M2.change_matrix_value(FROM_UP, i, j);
+            else if(M1.getvalue(i, j) == M1.getvalue(i, j - 1) + gap)
+                M2.change_matrix_value(FROM_LEFT, i, j);
             else
-                M2[i][j] = FROM_DIAGONAL;
+                M2.change_matrix_value(FROM_DIAGONAL, i, j);
         }
     }
     
@@ -46,14 +51,13 @@ run_status Pairwise_align_dna(mystring mystring_one, mystring mystring_two, resu
     int i_MAX = string_one_length - 1;
     int j_MAX = string_two_length - 1;
     for (int i = 0; i != string_one_length; i++){
-        if(M1[i][string_two_length - 1] > M1[i_MAX][j_MAX]){
+        if(M1.getvalue(i, string_two_length - 1)> M1.getvalue(i_MAX, j_MAX)){
             i_MAX = i;
             j_MAX = string_one_length - 1;
         }
     }
     for (int j = 0; j != string_two_length; j++){
-        
-        if(M1[string_one_length - 1][j] > M1[i_MAX][j_MAX]){
+        if(M1.getvalue(string_one_length - 1, j)> M1.getvalue(i_MAX, j_MAX)){
             i_MAX = string_two_length - 1;
             j_MAX = j;
         }
@@ -61,10 +65,10 @@ run_status Pairwise_align_dna(mystring mystring_one, mystring mystring_two, resu
     mystring return_string;
     
     while(1){
-        if(M2[i_MAX][j_MAX] == FROM_LEFT){
+        if(M2.getvalue(i_MAX, j_MAX) == FROM_LEFT){
             return_string.addLetterFront(mystring_two.getchar(j_MAX - 1));
             j_MAX--; 
-        } else if(M2[i_MAX][j_MAX] == FROM_UP){
+        } else if(M2.getvalue(i_MAX, j_MAX) == FROM_UP){
             i_MAX--;
             return_string.addLetterFront('-');
         } else {

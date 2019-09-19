@@ -30,7 +30,7 @@ static int test_pass = 0;
 
 static void align_dna_testing(){
     TEST_ALIGN_DNA(RUN_OK, "AATACC", "AACC", "AATACC");
-    TEST_ALIGN_DNA(RUN_OK, "AATACC", "AAMGG", "AAmTGG");
+    TEST_ALIGN_DNA(RUN_OK, "AAMTGG", "AAMGG", "AAmTGG");
 }
 
 static void testing(){
