@@ -22,7 +22,7 @@ For proteins, that is another thing. It's harder to get protein sequences than D
 This algorithm is used for searching **similiar sequences**, which can help us to design the primer in PCR or find the similiar g enes between organisms. Of course, it can be used to find motifs in DNA sequence, but I will introduce other several ways to find for they can find motifs without knowing the DNA sequence.
 
 ### similiar sequences
-When organisms are born, grow, proliferate and die, their genetic information changes and is passed on to their offspring. That i s part of the process of evolution. The process of evolution means that the vector of our genetic information, the DNA sequence i n our cells, change all the time, but there are some special sequences that serve as a very important role in our cells and if one mutation happens, cells will die soon.
+When organisms are born, grow, proliferate and die, their genetic information changes and is passed on to their offspring. That i s part of the process of evolution. The process of evolution means that the vector of our genetic information, the DNA sequence i n our cells, change all the time, but there are some special sequences that serve as a very important role in our cells and if one mutation happens, cells will die soon. Therefore, these sequences are highly conserved and are called **Conserved sequence**. That's why we can use pair_align_dna algorithm to search similiar sequences between two different species. 
 
-## mystring
-Instead of using string class in c++ STL, I construct a class **mystring** to store dna sequences. Of course, I admit that it is not as good as string class in STL. 
+### details of algorithm
+This algoritms 

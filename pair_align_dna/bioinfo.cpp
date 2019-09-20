@@ -15,9 +15,6 @@ run_status Pairwise_align_dna(mystring mystring_one, mystring mystring_two, resu
     if(mystring_one.isNone()||mystring_two.isNone()){
         return STRING_NULL;
     }
-    if(!mystring_one.isvalid()||!mystring_two.isvalid()){
-        return STRING_INVALID;
-    }
     int string_one_length = mystring_one.getlength() + 1; 
     int string_two_length = mystring_two.getlength() + 1;
     Mymatrix M1(string_one_length, string_two_length);
