@@ -29,6 +29,7 @@ class mystring {
 
     public:
         int getlength();
+        int find(char one);
         bool isvalid();
         bool isNone();
         const char* getstring();
@@ -36,6 +37,7 @@ class mystring {
         void addLetter(char one);
         void addLetterFront(char one);
         void addString(const char* k);
+        void reconstruct(const char* k);
         mystring(const char* k);
         mystring();
         ~mystring();
@@ -45,6 +47,13 @@ int mystring::getlength(){
     return length;
 }
 
+int mystring::find(char one){
+    for(int i = 0; i!= length; i++){
+        if(*(p + i) == one)
+            return i;
+    }
+    return -1;
+}
 bool mystring::isvalid(){
     int i = 0;
     while(*(p + i) != '\0'){
@@ -111,6 +120,11 @@ void mystring::addString(const char* k){
         strcat(p, k);
         free(temp);
     }
+}
+
+void mystring::reconstruct(const char* k){
+    free(p);
+    this->addString(k);
 }
 
 mystring::mystring(const char* k) {

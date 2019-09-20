@@ -24,6 +24,10 @@ void Mymatrix::change_matrix_value(double v, int i, int j){
     if(i < row&&j < col){
         array[i][j] = v;
     }
+}
+
+void Mymatrix::reconstruction(unsigned int i_row, unsigned int i_col){
+    free();
     col = i_col;
     row = i_row;
     array = new double*[row];
@@ -34,11 +38,6 @@ void Mymatrix::change_matrix_value(double v, int i, int j){
         for(int j = 0; j != col; j++)
             array[i][j] = 0.0;
     }
-}
-
-void Mymatrix::reconstruction(unsigned int row, unsigned int col){
-    free();
-
 }
 
 double Mymatrix::getvalue(int i, int j){

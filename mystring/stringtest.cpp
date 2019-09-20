@@ -16,6 +16,7 @@ static int test_pass = 0;
     }while(0)
 
 #define EXPECT_TEST_STRING(expect, actual) EXPECT_TEST_ACTUAL(!strcmp(expect, actual), expect, actual, "%s")
+#define EXPECT_TEST_INT(expect, actual) EXPECT_TEST_ACTUAL(expect==actual, expect, actual, "%d")
 
 void testing_string_construction(){
     mystring i("aaaccc");
@@ -59,12 +60,36 @@ void EXPECT_TESTING_ADDSTRING(const char* expect,const char* input1,const char* 
 void testing_add_string(){
     EXPECT_TESTING_ADDSTRING("AACC", "AA", "CC");
 }
+
+#define EXPECT_TESTING_RECONSTRUCT(expect1, expect2, input1, input2)\
+    do{\
+        mystring i1(input1);\
+        EXPECT_TEST_STRING(expect1, i1.getstring());\
+        i1.reconstruct(input2);\
+        EXPECT_TEST_STRING(expect2, i1.getstring());\
+    }while(0)
+
+void testing_reconstruction(){
+    EXPECT_TESTING_RECONSTRUCT("AA","CC","AA","CC");
+}
+
+#define EXPECT_TESTING_FIND(expect, actual)\
+    do{\
+        mystring i1("ACTG");\
+        EXPECT_TEST_INT(expect, i1.find(actual));\
+    }while(0)
+
+void testing_find(){
+    EXPECT_TESTING_FIND(0, 'A');
+
+}
 void testing(){
     testing_string_construction();
     testing_null();
     testing_string_valid();
     testing_letter_add();
     testing_add_string();
+    testing_find();
 }
 
 int main(){

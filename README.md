@@ -1,11 +1,13 @@
-
 # bioinfo_warehouse
 
-- [introduction](#introduction)      
+- [introduction](#introduction)        
     - [sequence](#sequence)
-- [pair_align_dna](#pair_align_dna)      
-    - [similiar sequences](#similiar-sequences)  
-- [mystring](#mystring)
+- [pair_align_dna](#pair_align_dna)    
+    - [similiar sequences](#similiar-sequences)    
+- [details of algorithm](#details-of-algorithm)
+    - [0. before start the algoritm](#0-before-start-the-algoritm)  
+    - [1. The initialization of a matrix](#1-the-initialization-of-a-matrix)        
+    - [2. Matrix completion](#2-matrix-completion)
 
 ## introduction
 The bioinfo_warehouse stores codes about bioinformational algorithms. Now it includes sequence alignment. Soon i will update the code and implement algorithms. This markdown will be updated and introduce the details of algorithms.
@@ -24,5 +26,18 @@ This algorithm is used for searching **similiar sequences**, which can help us t
 ### similiar sequences
 When organisms are born, grow, proliferate and die, their genetic information changes and is passed on to their offspring. That i s part of the process of evolution. The process of evolution means that the vector of our genetic information, the DNA sequence i n our cells, change all the time, but there are some special sequences that serve as a very important role in our cells and if one mutation happens, cells will die soon. Therefore, these sequences are highly conserved and are called **Conserved sequence**. That's why we can use pair_align_dna algorithm to search similiar sequences between two different species. 
 
-### details of algorithm
-This algoritms 
+## details of algorithm
+This algoritm has three step:
+### 0. before start the algoritm
+We will set $gap$ as $-2$ and assume that if two letters in different sequences are the same, the grade will be $+1$. Otherwise, it will $-1$.
+Of course, we can also introduce an aligned matrix to get grade when we align two letters. Here is one of examples:
+
+### 1. The initialization of a matrix
+we will build a matrix $M$, of which the numbers of rows and column are the lengths of two string. At first, we will set all the values in matrix are zero. 
+At the first column of matrix, we set $i*gap$ at the location $(i, 0)$
+of matrix. The number $i$ is the number of row. And we do the same to the first row of matrix. Here is the diagram.
+
+### 2. Matrix completion
+Now, we will fill in the matrix. For the unit at the $i^{th}$ row and $j^{th}$ column in the matrix, we calculate the its value by using the following formula.
+$$M[i, j] = Max(M[i - 1, j] + gap, M[i, j - 1] + gap, M[i, j] + align(i, j))$$
+
