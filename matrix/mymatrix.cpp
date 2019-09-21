@@ -1,24 +1,11 @@
-class Mymatrix{
-    private:
-        unsigned int row, col;
-        double** array;
-        
+#include "mymatrix.h"
 
-        void free(){
-            for(int i = 0; i!= row; i++){
+void Mymatrix::free(){
+    for(int i = 0; i!= row; i++){
                 delete []array[i];
-            }
-            delete []array;
-        }
-    public:
-        void change_matrix_value(double v, int i, int j);
-        void reconstruction(unsigned int row, unsigned int col);
-        double getvalue(int i, int j);
-        Mymatrix();
-        Mymatrix(unsigned int row, unsigned int col);
-        ~Mymatrix();
-};
-
+    }
+    delete []array;
+}
 
 void Mymatrix::change_matrix_value(double v, int i, int j){
     if(i < row&&j < col){

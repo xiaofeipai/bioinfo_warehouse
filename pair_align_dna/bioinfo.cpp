@@ -11,6 +11,7 @@ int align_letter(char one, char two){
     else
         return -1;
 }
+
 run_status Pairwise_align_dna(mystring mystring_one, mystring mystring_two, result* string_result){
     if(mystring_one.isNone()||mystring_two.isNone()){
         return STRING_NULL;

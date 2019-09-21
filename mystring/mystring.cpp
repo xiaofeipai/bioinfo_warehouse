@@ -1,48 +1,29 @@
+#include "mystring.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
 
-class mystring {
-    private:
-        char *p;
-        int length = 0;
+/*This for private function*/
+bool mystring::isvalid_letter(char m){
+    return((m == 'A')||(m == 'T')||(m == 'C')||(m == 'G')||(m == 'R')||
+        (m == 'Y')||(m == 'K')||(m == 'S')||(m == 'M')||(m == 'H')||(m == 'B')||(m == 'V')||(m == 'D')||(m == 'N'));
+}
 
-        bool isvalid_letter(char m){
-            return((m == 'A')||(m == 'T')||(m == 'C')||(m == 'G')||(m == 'R')||
-                (m == 'Y')||(m == 'K')||(m == 'S')||(m == 'M')||(m == 'H')||(m == 'B')||(m == 'V')||(m == 'D')||(m == 'N'));
-        }
-    
-        void addchar(char p1, const char* p2){
-            p = (char*)malloc(strlen(p2) + 2);
-            strcpy(p, p2);
-            *(p + strlen(p2)) = p1;
-            *(p + strlen(p2) + 1) = '\0'; 
-        }
+void mystring::addchar(char p1, const char* p2){
+    p = (char*)malloc(strlen(p2) + 2);
+    strcpy(p, p2);
+    *(p + strlen(p2)) = p1;
+    *(p + strlen(p2) + 1) = '\0'; 
+}
 
-        void addcharFront(char p1, const char* p2){
-            p = (char*)malloc(strlen(p2) + 2);
-            *p = p1; 
-            *(p + 1) = '\0';
-            strcat(p, p2);
-        }
-
-    public:
-        int getlength();
-        int find(char one);
-        bool isvalid();
-        bool isNone();
-        const char* getstring();
-        char getchar(int i);
-        void addLetter(char one);
-        void addLetterFront(char one);
-        void addString(const char* k);
-        void reconstruct(const char* k);
-        mystring(const char* k);
-        mystring();
-        ~mystring();
-};
-
+void mystring:: addcharFront(char p1, const char* p2){
+    p = (char*)malloc(strlen(p2) + 2);
+    *p = p1; 
+    *(p + 1) = '\0';
+    strcat(p, p2);
+}
+/*This for public function*/
 int mystring::getlength(){
     return length;
 }
