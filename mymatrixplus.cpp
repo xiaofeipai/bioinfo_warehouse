@@ -2,16 +2,17 @@
 #include "./matrix/mymatrix.cpp"
 
 class Mymatrixplus{
-    Mymatrix m1;
-    mystring s1;
-    mystring s2;
-
-    double findByNum(unsigned int i,unsigned int j);
-    double findbychar(char one, char two);
-    void changevaluebynum(unsigned int i,unsigned int j, double v);
-    void changevaluebychar(char one, char two, double v);
-    Mymatrixplus(const char* string_one, const char* string_two);
-    ~Mymatrixplus();
+    private:
+        Mymatrix m1;
+        mystring s1;
+        mystring s2;
+    public:
+        double findByNum(unsigned int i,unsigned int j);
+        double findbychar(char one, char two);
+        void changevaluebynum(unsigned int i,unsigned int j, double v);
+        void changevaluebychar(char one, char two, double v);
+        Mymatrixplus(const char* string_one, const char* string_two);
+        ~Mymatrixplus();
 };
 
 double Mymatrixplus::findByNum(unsigned int i, unsigned int j){

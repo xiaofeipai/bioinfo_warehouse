@@ -10,6 +10,11 @@ bool mystring::isvalid_letter(char m){
         (m == 'Y')||(m == 'K')||(m == 'S')||(m == 'M')||(m == 'H')||(m == 'B')||(m == 'V')||(m == 'D')||(m == 'N'));
 }
 
+bool mystring::isvalid_letter_plus(char m){
+    return((m == 'A')||(m == 'T')||(m == 'C')||(m == 'G'));
+}
+
+
 void mystring::addchar(char p1, const char* p2){
     p = (char*)malloc(strlen(p2) + 2);
     strcpy(p, p2);
@@ -39,6 +44,17 @@ bool mystring::isvalid(){
     int i = 0;
     while(*(p + i) != '\0'){
         if(!(isvalid_letter(*(p + i)))){
+            return false;
+        }
+        i++;
+    }
+    return true;
+}
+
+bool mystring::isvalid_plus(){
+        int i = 0;
+    while(*(p + i) != '\0'){
+        if(!(isvalid_letter_plus(*(p + i)))){
             return false;
         }
         i++;

@@ -6,12 +6,14 @@ class mystring {
         int length = 0;
 
         bool isvalid_letter(char m);
+        bool isvalid_letter_plus(char m);
         void addchar(char p1, const char* p2);
         void addcharFront(char p1, const char* p2);
     public:
         int getlength();
         int find(char one);
         bool isvalid();
+        bool isvalid_plus();
         bool isNone();
         const char* getstring();
         char getchar(int i);
