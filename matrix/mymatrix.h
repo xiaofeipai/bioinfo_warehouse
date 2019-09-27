@@ -9,6 +9,8 @@ class Mymatrix{
     public:
         void change_matrix_value(double v, int i, int j);
         void reconstruction(unsigned int row, unsigned int col);
+        int get_row();
+        int get_col();
         double getvalue(int i, int j);
         Mymatrix();
         Mymatrix(unsigned int row, unsigned int col);

@@ -27,6 +27,14 @@ void Mymatrix::reconstruction(unsigned int i_row, unsigned int i_col){
     }
 }
 
+int Mymatrix::get_row(){
+    return row;
+}
+
+int Mymatrix::get_col(){
+    return col;
+}
+
 double Mymatrix::getvalue(int i, int j){
     if(i < row&&j < col){
         return array[i][j];
